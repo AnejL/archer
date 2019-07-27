@@ -1,0 +1,34 @@
+#
+# ~/.bashrc
+# by anejL
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+
+PS1="\[$(tput setaf 4)\][ \[$(tput sgr0)\]\u@\h \[$(tput setaf 2)\]\w \[$(tput setaf 4)\]] $ \[$(tput sgr0)\]"
+PATH=$PATH:/home/anej/.config/nvim/bundle/vim-live-latex-preview/bin/
+#PATH=$PATH:~/.vim/bundle/vim-live-latex-preview/bin
+
+export EDITOR=nvim
+
+alias cv='cd $HOME/Documents/Latex/CV && vim cv.tex'
+alias hkd='vim $HOME/.config/sxhkd/sxhkdrc && sxhkd'
+
+alias odw='cd /opt/dwm'
+alias ost='cd /opt/st'
+
+alias vc='vim config.h'
+alias vcc='vim config.h && sudo make clean install'
+
+alias psyu='sudo pacman -Syu'
+alias psyyu='sudo pacman -Syyu'
+alias ps='sudo pacman -S'
+
+alias vim='nvim'
+alias ds='cd /home/anej/Documents/Scripts'
+alias dsd='cd /home/anej/Documents/Scripts/dwmbar'
+alias dsa='cd /home/anej/Documents/Scripts/archer'
+alias o='cd /opt'
+alias mt='/home/anej/Documents/Scripts/mount.sh'

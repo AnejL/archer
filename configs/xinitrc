@@ -1,0 +1,25 @@
+#!/bin/bash
+xset b off
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+	for f in /etc/X11/xinit/xinitrc.d/*; do
+		[ -x "$f" ] && . "$f"
+	done
+	unset f
+fi
+
+xrdb -load /home/anej/.Xresources
+
+flameshot &
+
+#exec sxhkd &
+sxhkd -c $HOME/.config/sxhkd/sxhkdrc &
+
+#-----------------------dwm
+
+feh --bg-scale /usr/share/backgrounds/i3_default_background.jpg
+
+dwmbar &
+ 
+exec dwm
+
+#----------------------!dwm

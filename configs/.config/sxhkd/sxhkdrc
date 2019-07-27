@@ -1,0 +1,23 @@
+alt + Escape
+	pkill -USR1 -x sxhkd
+
+alt + {Insert,Delete} 
+	pactl set-sink-volume @DEFAULT_SINK@ {+,-}5% && refbar
+
+alt + shift + Delete
+	pactl set-sink-mute   @DEFAULT_SINK@ toggle && refbar
+
+alt + shift + Insert
+	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+alt + shift + i
+	/home/anej/Documents/Scripts/chooseide.sh
+
+alt + ctrl + {k,l,s}
+	systemctl {poweroff, reboot, suspend}
+
+alt + g
+	/home/anej/Documents/Scripts/creds.sh
+
+@Print
+	flameshot gui
