@@ -16,7 +16,9 @@ sxhkd -c $HOME/.config/sxhkd/sxhkdrc &
 
 #-----------------------dwm
 
-feh --bg-scale /usr/share/backgrounds/i3_default_background.jpg
+#feh --bg-scale /usr/share/backgrounds/i3_default_background.jpg
+feh --bg-scale /home/anej/Pictures/Wallpapers/miia.png
+
 
 dwmbar &
  

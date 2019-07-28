@@ -11,6 +11,8 @@ PS1="\[$(tput setaf 4)\][ \[$(tput sgr0)\]\u@\h \[$(tput setaf 2)\]\w \[$(tput s
 PATH=$PATH:/home/anej/.config/nvim/bundle/vim-live-latex-preview/bin/
 #PATH=$PATH:~/.vim/bundle/vim-live-latex-preview/bin
 
+SCRIPTDIR="$HOME/Documents/Scripts"
+
 export EDITOR=nvim
 
 alias cv='cd $HOME/Documents/Latex/CV && vim cv.tex'
@@ -32,3 +34,5 @@ alias dsd='cd /home/anej/Documents/Scripts/dwmbar'
 alias dsa='cd /home/anej/Documents/Scripts/archer'
 alias o='cd /opt'
 alias mt='/home/anej/Documents/Scripts/mount.sh'
+
+alias aura='$SCRIPTDIR/aura/aura.sh'
