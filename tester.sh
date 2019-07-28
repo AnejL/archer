@@ -1,6 +1,17 @@
 #!/bin/bash
 # pacman install
 
+#
+#
+#
+#
+#	THIS PROGRAM USES DUMMY FUNCTIONS TO TEST ITERATIONS THROUGH ARRAYS AND SOME OTHER SHIT TOO
+#
+#
+#
+#
+
+
 thisdir=$PWD
 
 read -p "Install essential pacman packages? [y/n] " -n 1 -r
