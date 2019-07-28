@@ -49,6 +49,16 @@ then
 	cp -r "configs/.config/*" $HOME/.config/
 
 	echo -e "Copying over suckless configs"
+	
+	# -- fugly part -- #
+
+
+	cd /opt/dwm
+	sudo git apply $thisdir/configs/suckless/patches/dwm-fullgaps-6.2.diff
+
+	# -- gonna add this later -- #
+	
+	
 	for sp in $sucklessprograms; do
 		cd $thisdir
 
@@ -58,6 +68,17 @@ then
 		sudo make clean install
 	done
 fi
+
+
+read -p "Install AUR packages (with aura)? [y/n] " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	aurprograms=("$(cat aur | tr '\n' ' ')")
+	for ap in $aurprograms; do
+		aura $ap
+	done
+fi
+
 
 
 exit 0
