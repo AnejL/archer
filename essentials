@@ -29,7 +29,7 @@ thunar
 thunar-volman
 unzip
 zip
-nvim
+neovim
 vim
 wget
 mupdf
@@ -37,3 +37,8 @@ zathura
 zathura-pdf-mupdf
 zathura-ps
 zathura-djvu
+vlc
+ttf-dejavu
+ttf-font-awesome
+libinput
+xf86-input-keyboard

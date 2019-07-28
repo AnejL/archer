@@ -7,8 +7,9 @@ read -p "Install essential pacman packages? [y/n] " -n 1 -r
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-	sudo pacman -Syu
-	sudo pacman -S $(cat essentials | tr "\n" " ")
+	#sudo pacman -Syu
+	#sudo pacman -S $(echo .essentials)
+	cat essentials
 fi
 
 
@@ -20,14 +21,17 @@ sucklessprograms=("st dwm dmenu")
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	for sp in $sucklessprograms; do
-		cd /opt
-		sudo git clone https://git.suckless.org/$sp
-		sudo chmod +777 $sp
-		cd $sp
-		sudo chmod +777 *
-		sudo make clean install
+		#cd /opt
+		echo "/opt/$sp"
+		#sudo git clone https://git.suckless.org/$sp
+		#chmod +777 $sp
+		#cd $sp
+		#chmod +777 *
+		#sudo make clean install
 	done
 fi
+
+echo "ENDED SUCKLESS!"
 
 cd $thisdir
 
@@ -37,27 +41,31 @@ read -p "Install configs? [y/n] " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	echo -e "\n\n> Copying xorg configs"
-	sudo cp "configs/xorg/"* /etc/X11/xorg.conf.d/
-	
-	echo -e "\n\n> Copying vimrc"
-	cp "configs/vimrc" $HOME/.vimrc
+	cat "$PWD/configs/xorg/"*
 
+	echo -e "\n\n> Copying vimrc"
+	cat "$PWD/configs/vimrc"
+	
 	echo -e "\n\n> Copying bashrc"
-	cp "configs/bash/bashrc" $HOME/.bashrc
+	cat "$PWD/configs/bash/bashrc"
 
 	echo -e "\n\n> Copying misc configs"
-	cp -r "configs/.config/*" $HOME/.config/
+	ls -l "$PWD/configs/.config/"*
 
-	echo -e "Copying over suckless configs"
+	echo "Copying over suckless configs"
 	for sp in $sucklessprograms; do
 		cd $thisdir
 
-		sudo cp "configs/suckless/$sp-config.h" /opt/$sp/config.h
+		echo "$sp"
+
+		echo $(cat "configs/suckless/$sp-config.h" | head -10)
 
 		cd /opt/$sp
-		sudo make clean install
+		echo $PWD
+		#sudo make clean install
 	done
 fi
+
 
 
 exit 0
