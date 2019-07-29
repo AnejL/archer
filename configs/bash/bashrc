@@ -36,3 +36,4 @@ alias o='cd /opt'
 alias mt='/home/anej/Documents/Scripts/mount.sh'
 
 alias aura='$SCRIPTDIR/aura/aura.sh'
+alias gc='$SCRIPTDIR/gitpush.sh'
