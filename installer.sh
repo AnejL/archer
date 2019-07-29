@@ -1,5 +1,4 @@
 #!/bin/bash
-# pacman install
 
 function prompt() {
 	read -p "$1 [y/n] " -n 1 -r
@@ -10,6 +9,7 @@ ESSENTIALS=$(cat essentials | tr "\n" " ")
 SUCKLESSPROGRAMS=("st dwm dmenu")
 AURPROGRAMS=("$(cat aur | tr '\n' ' ')")
 
+# pacman install
 prompt "Install essential pacman packages?"
 
 if [[ $REPLY =~ ^[Yy]$ ]]
