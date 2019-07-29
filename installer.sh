@@ -1,25 +1,29 @@
 #!/bin/bash
 # pacman install
 
-thisdir=$PWD
+function prompt() {
+	read -p "$1 [y/n] " -n 1 -r
+}
 
-read -p "Install essential pacman packages? [y/n] " -n 1 -r
+THISDIR=$PWD
+ESSENTIALS=$(cat essentials | tr "\n" " ")
+SUCKLESSPROGRAMS=("st dwm dmenu")
+AURPROGRAMS=("$(cat aur | tr '\n' ' ')")
+
+prompt "Install essential pacman packages?"
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	sudo pacman -Syu
-	sudo pacman -S $(cat essentials | tr "\n" " ")
+	sudo pacman -S $ESSENTIALS 
 fi
 
-
 #install suckless
-read -p "Install suckless programs? [y/n] " -n 1 -r
-
-sucklessprograms=("st dwm dmenu")
+prompt "Install suckless programs?"
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-	for sp in $sucklessprograms; do
+	for sp in $SUCKLESSPROGRAMS; do
 		cd /opt
 		sudo git clone https://git.suckless.org/$sp
 		sudo chmod +777 $sp
@@ -29,10 +33,10 @@ then
 	done
 fi
 
-cd $thisdir
+cd $THISDIR
 
 #install configs
-read -p "Install configs? [y/n] " -n 1 -r
+prompt "Install configs?"
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
@@ -50,17 +54,16 @@ then
 
 	echo -e "Copying over suckless configs"
 	
-	# -- fugly part -- #
-
+	# -- ugly part -- #
 
 	cd /opt/dwm
-	sudo git apply $thisdir/configs/suckless/patches/dwm-fullgaps-6.2.diff
+	sudo git apply $THISDIR/configs/suckless/patches/dwm-fullgaps-6.2.diff
 
-	# -- gonna add this later -- #
+	# -- TODO apply patches automatically -- #
 	
 	
-	for sp in $sucklessprograms; do
-		cd $thisdir
+	for sp in $SUCKLESSPROGRAMS; do
+		cd $THISDIR
 
 		sudo cp "configs/suckless/$sp-config.h" /opt/$sp/config.h
 
@@ -70,15 +73,18 @@ then
 fi
 
 
-read -p "Install AUR packages (with aura)? [y/n] " -n 1 -r
+prompt "Install AUR packages (with aura)?"
+
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-	aurprograms=("$(cat aur | tr '\n' ' ')")
-	for ap in $aurprograms; do
+
+	for ap in $AURPROGRAMS; do
 		aura $ap
 	done
 fi
 
-
+# start cups printer service
+sudo systemctl enable org.cups.cupsd.service
+sudo systemctl start org.cups.cupsd.service
 
 exit 0
