@@ -44,3 +44,4 @@ libinput
 xf86-input-keyboard
 cups
 hplip
+vim-nerdtree

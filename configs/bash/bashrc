@@ -8,7 +8,7 @@
 alias ls='ls --color=auto'
 
 PS1="\[$(tput setaf 4)\][ \[$(tput sgr0)\]\u@\h \[$(tput setaf 2)\]\w \[$(tput setaf 4)\]] $ \[$(tput sgr0)\]"
-PATH=$PATH:/home/anej/.config/nvim/bundle/vim-live-latex-preview/bin/
+#PATH=$PATH:/home/anej/.config/nvim/bundle/vim-live-latex-preview/bin/
 #PATH=$PATH:~/.vim/bundle/vim-live-latex-preview/bin
 
 SCRIPTDIR="$HOME/Documents/Scripts"
@@ -18,6 +18,7 @@ export EDITOR=nvim
 alias cv='cd $HOME/Documents/Latex/CV && vim cv.tex'
 alias hkd='vim $HOME/.config/sxhkd/sxhkdrc && sxhkd'
 
+alias o='cd /opt'
 alias odw='cd /opt/dwm'
 alias ost='cd /opt/st'
 
@@ -29,11 +30,13 @@ alias psyyu='sudo pacman -Syyu'
 alias ps='sudo pacman -S'
 
 alias vim='nvim'
-alias ds='cd /home/anej/Documents/Scripts'
-alias dsd='cd /home/anej/Documents/Scripts/dwmbar'
-alias dsa='cd /home/anej/Documents/Scripts/archer'
-alias o='cd /opt'
-alias mt='/home/anej/Documents/Scripts/mount.sh'
+alias ds='cd $SCRIPTDIR'
+alias dsd='cd $SCRIPTDIR/dwmbar' 
+alias dsa='cd $SCRIPTDIR/archer'
+
+alias mt='$SCRIPTDIR/mount.sh'
 
 alias aura='$SCRIPTDIR/aura/aura.sh'
 alias gc='$SCRIPTDIR/gitpush.sh'
+
+alias brc='vim $HOME/.bashrc && source $HOME/.bashrc'
