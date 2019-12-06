@@ -1,6 +1,8 @@
 **What is it?**
 
 It's an interactive utility installer for Arch + pacman based systems. It installs my personal barebones system utilities, formats home folder, downloads my shell scripts, configs and my fork of suckless dwm and st.
+**BEWARE! THIS VERSION HAS NOT BEEN TESTED (will be in a couple of days)**
+
 
 **How to run it?**
 
