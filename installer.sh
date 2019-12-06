@@ -1,16 +1,25 @@
 #!/bin/bash
 
+# Helper functions
+#
+# function for asking user something
 function prompt() {
 	read -p "$1 [y/n] " -n 1 -r
 }
 
+# checks if said packages are installed and installs them if they are missing
 function installifmissing() {
 	if [ ! "$(pacman -Qi $* | grep error)" = "" ]
 	then
-		echo "Installing packages: $*"
+		echo "> Installing packages: $*"
 		pacman -S $*
+	else
+		echo "> Dependencies ok!"
 	fi
 }
+
+# TODO add a function for specifying a custom destination folder
+
 
 # defining global variables
 THISDIR=$PWD
