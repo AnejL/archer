@@ -1,6 +1,6 @@
 **What is it?**
 
-It's an interactive utility installer for Arch + pacman based systems. It installs my personal barebones system utilities + minimal set of suckless tools (dwm with fullgaps patch + st + dmenu).
+It's an interactive utility installer for Arch + pacman based systems. It installs my personal barebones system utilities, formats home folder, downloads my shell scripts, configs and my fork of suckless dwm and st.
 
 **How to run it?**
 
@@ -14,11 +14,11 @@ Script structure easily allows adding your own modules and modifying existing on
 
 **What do all these files do?**
 
-*aur* - list of AUR git repos
+*installer.sh* - main script that makes all the changes to the system
+
+*aur* - list of AUR programs
 
 *essentials* - list of essential official arch packages for creating a small and functional system
-
-*installer.sh* - main script that makes all the changes to the system
 
 *configs* - directory for all the config files that are copied or compiled in the installation process 
 

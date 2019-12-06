@@ -4,12 +4,21 @@ function prompt() {
 	read -p "$1 [y/n] " -n 1 -r
 }
 
+function installifmissing() {
+	if [ ! "$(pacman -Qi $* | grep error)" = "" ]
+	then
+		echo "Installing packages: $*"
+		pacman -S $*
+	fi
+}
+
+# defining global variables
 THISDIR=$PWD
 ESSENTIALS=$(cat essentials | tr "\n" " ")
-SUCKLESSPROGRAMS=("st dwm dmenu")
-AURPROGRAMS=("$(cat aur | tr '\n' ' ')")
+SUCKLESSPROGRAMS=("dmenu surf")
+AURPROGRAMS=$(cat aur | tr '\n' ' ')
 
-# pacman install
+# install packages provided in essential file
 prompt "Install essential pacman packages?"
 
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -18,11 +27,14 @@ then
 	sudo pacman -S $ESSENTIALS 
 fi
 
-#install suckless
+#install specified suckless programs
 prompt "Install suckless programs?"
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+	# install git and make if not installed already
+	installifmissing git base-devel
+
 	for sp in $SUCKLESSPROGRAMS; do
 		cd /opt
 		sudo git clone https://git.suckless.org/$sp
@@ -35,52 +47,91 @@ fi
 
 cd $THISDIR
 
-#install configs
-prompt "Install configs?"
+prompt "Install my patched version of dwm and st?"
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+	# install git and make if not installed already
+	installifmissing git base-devel
+
+	# install dwm
+	cd /opt
+	git clone https://github.com/AnejL/dwm
+	cd dwm
+	sudo make clean install
+
+	# install st
+	cd /opt
+	git clone https://github.com/AnejL/st
+	cd st
+	sudo make clean install
+fi
+
+cd $THISDIR
+
+
+#install configs and dotfiles
+prompt "Install configs and dotfiles?"
+
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	# misc xorg configs (keyboard etc.)
 	echo -e "\n\n> Copying xorg configs"
 	sudo cp "configs/xorg/"* /etc/X11/xorg.conf.d/
-	
-	echo -e "\n\n> Copying vimrc"
-	cp "configs/vimrc" $HOME/.vimrc
 
-	echo -e "\n\n> Copying bashrc"
-	cp "configs/bash/bashrc" $HOME/.bashrc
+	# install my dotfiles from git
+	cd $HOME
+	git clone https://github.com/AnejL/dotfiles
+fi
 
-	echo -e "\n\n> Copying misc configs"
-	cp -r "configs/.config/*" $HOME/.config/
+# organize home folder and scripts and college files
+prompt "Organize home folder?"
 
-	echo -e "Copying over suckless configs"
-	
-	# -- ugly part -- #
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	cd $HOME
+	mkdir Documents Pictures Downloads Music Videos Backup .fonts .themes .icons
 
-	cd /opt/dwm
-	sudo git apply $THISDIR/configs/suckless/patches/dwm-fullgaps-6.2.diff
+	# install my scripts TODO in universal location
+	prompt "Download my script folder in Documents/Scripts?"
 
-	# -- TODO apply patches automatically -- #
-	
-	
-	for sp in $SUCKLESSPROGRAMS; do
-		cd $THISDIR
+	if [[ $REPLY =~ ^[Yy]$ ]]
+	then
+		cd $HOME/Documents
+		mkdir Scripts
+		cd Scripts
+		git clone https://github.com/AnejL/Scripts
+	fi
 
-		sudo cp "configs/suckless/$sp-config.h" /opt/$sp/config.h
+	# college files
+	prompt "Download my college files?"
 
-		cd /opt/$sp
-		sudo make clean install
-	done
+	if [[ $REPLY =~ ^[Yy]$ ]]
+	then
+		cd Documents
+		mkdir faks
+		cd faks
+		git clone https://github.com/AnejL/Faks
+	fi
 fi
 
 
-prompt "Install AUR packages (with aura)?"
+
+prompt "Install yay and AUR packages?"
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+	# if not installed install git and make
+	installifmissing git base-devel
+	
+	# manually install yay aur helper
+	cd /opt
+	git clone https://aur.archlinux.org/yay.git
+	cd yay
+	makepkg -si
 
-	for ap in $AURPROGRAMS; do
-		aura $ap
-	done
+	# install the array of aur programs
+	sudo yay -S $AURPROGRAMS
 fi
 
 # start cups printer service
