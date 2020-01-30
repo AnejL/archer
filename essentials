@@ -35,11 +35,8 @@ zathura-pdf-mupdf
 vlc
 ttf-dejavu
 ttf-font-awesome
-ttf-ibm-plex-git
-ttf-mononoki
 ttf-hack
 libinput
-xf86-input-keyboard
 cups
 hplip
 vim-nerdtree
@@ -57,3 +54,5 @@ scrot
 tmux
 weechat
 xsel
+wmname
+xf86-video-intel
