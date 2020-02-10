@@ -12,10 +12,10 @@ function prompt() {
 function installifmissing() {
 	if [ ! $(pacman -Qi $* | grep error | wc -l) -gt 0 ]
 	then
-		echo "> Installing packages: $*"
+		echo -e "> Installing packages: $*\n"
 		sudo pacman -S $*
 	else
-		echo "> Dependencies ok!"
+		echo -e "> Dependencies ok!\n"
 	fi
 }
 
@@ -127,7 +127,7 @@ then
 		cd Scripts
 		git clone https://github.com/AnejL/dbc
 		cd dbc
-		sudo make clean install
+		sudo make
 		
 		cd ..
 		git clone https://github.com/AnejL/archer
@@ -157,6 +157,7 @@ then
 	# manually install yay aur helper
 	cd /opt
 	sudo git clone https://aur.archlinux.org/yay.git
+	sudo chown -R $USER yay 
 	cd yay
 	makepkg -si
 
