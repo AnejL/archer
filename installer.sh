@@ -102,7 +102,7 @@ then
 	installifmissing git
 	# TODO what files are in conflict here? WC - use fetch --all + reset method
 	cd $HOME
-	rm .bashrc .bash_profile
+	rm .bashrc .bash_profile .bash_history .bash_logout
 	git init
 	git remote add origin https://github.com/AnejL/dotfiles
 	git pull origin master
