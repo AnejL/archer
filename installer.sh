@@ -182,6 +182,6 @@ cd
 # sudo systemctl enable org.cups.cupsd.service
 # sudo systemctl start org.cups.cupsd.service
 
-echo -e "\nInstallation finished! Start xorg with startx"
+echo -e "\nInstallation finished! Remove archer folder with rm -rf archer \n after that start xorg with startx"
 
 exit 0
