@@ -131,6 +131,9 @@ then
 		
 		cd ..
 		git clone https://github.com/AnejL/archer
+
+		cd ..
+		./installall.sh
 	fi
 
 	# college files
