@@ -123,6 +123,14 @@ then
 	then
 		cd $HOME/Documents
 		git clone https://github.com/AnejL/Scripts
+
+		cd Scripts
+		git clone https://github.com/AnejL/dbc
+		cd dbc
+		sudo make clean install
+		
+		cd ..
+		git clone https://github.com/AnejL/archer
 	fi
 
 	# college files
@@ -130,7 +138,7 @@ then
 
 	if [[ $REPLY =~ ^[Yy]$ ]]
 	then
-		cd Documents
+		cd $HOME/Documents
 		mkdir faks
 		cd faks
 		git init
@@ -173,5 +181,7 @@ cd
 # start cups printer service
 # sudo systemctl enable org.cups.cupsd.service
 # sudo systemctl start org.cups.cupsd.service
+
+echo -e "\nInstallation finished! Start xorg with startx"
 
 exit 0
