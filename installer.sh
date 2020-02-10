@@ -139,8 +139,8 @@ then
 	if [[ $REPLY =~ ^[Yy]$ ]]
 	then
 		cd $HOME/Documents
-		mkdir faks
-		cd faks
+		mkdir Faks
+		cd Faks
 		git init
 		git remote add origin https://github.com/AnejL/Faks
 		git pull origin master
