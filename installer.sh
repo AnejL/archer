@@ -13,10 +13,10 @@ function prompt() {
 function installifmissing() {
 	if [ ! $(pacman -Qi $* | grep error | wc -l) -gt 0 ]
 	then
-		echo -e "> Installing packages: $*\n"
+		echo -e "\n\n> Installing packages: $*\n\n"
 		sudo pacman -S $*
 	else
-		echo -e "> Dependencies ok!\n"
+		echo -e "\n\n> Dependencies ok!\n\n"
 	fi
 }
 
@@ -107,6 +107,11 @@ then
 	git init
 	git remote add origin https://github.com/AnejL/dotfiles
 	git pull origin master
+
+
+	prompt "Select this computer's unique profile name:"
+
+	echo "$REPLY" > $HOME/.config/profile
 fi
 
 # organize home folder and scripts and college files
@@ -133,7 +138,6 @@ then
 		cd ..
 		git clone https://github.com/AnejL/archer
 
-		cd ..
 		./installall.sh
 	fi
 
@@ -180,6 +184,16 @@ then
 	echo -e "\n\n> Overwriting pulseaudio configs"
 	sudo cp "configs/pulse/"* /etc/pulse/
 fi
+
+prompt "Are you installing Arch on a VirtualBox virtual machine?"
+
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	sudo pacman -S virtualbox-guest-utils xf86-video-vmware
+	sudo systemctl enable vboxservice.service
+	sudo systemctl start vboxservice.service
+fi
+
 
 cd 
 
