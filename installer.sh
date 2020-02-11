@@ -174,7 +174,7 @@ then
 fi
 
 
-prompt "Make pulseaudio bearable (if installed)?"
+prompt "Make pulseaudio bearable (convert to dumb and unintrusive pipe to alsa)?"
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
