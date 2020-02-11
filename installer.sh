@@ -4,7 +4,7 @@
 #
 # function for asking user something
 function prompt() {
-	read -p "$1 [y/n] " -n 1 -r
+	read -p "\n$1 [y/n] " -n 1 -r
 }
 
 # checks if said packages are installed and installs them if they are missing
