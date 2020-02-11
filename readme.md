@@ -6,7 +6,18 @@ It's an interactive utility installer for Arch + pacman based systems. It instal
 
 **How to run it?**
 
-./installer.sh
+
+
+Firstly, install necessary programs with 
+
+> sudo pacman -S git base-devel
+
+afterwards clone this git repo with
+
+> git clone https://github.com/anejl/archer
+> cd archer
+
+> ./installer.sh
 
 **How to change it?**
 
