@@ -133,12 +133,24 @@ then
 		cd Scripts
 		git clone https://github.com/AnejL/dbc
 		cd dbc
-		sudo make
+		sudo make clean install
 		
 		cd ..
 		git clone https://github.com/AnejL/archer
 
 		./installall.sh
+
+		# systemd service for lidlock
+		prompt "Install systemd service that calls i3lock on lid closing? (you will need to change the username and location...)"
+
+		if [[ $REPLY =~ ^[Yy]$ ]]
+		then
+			cd $THISDIR
+			sudo cp configs/systemd/lidclose.service /etc/systemd/system/lidclose.service
+			sudo cp configs/systemd/logind.conf /etc/systemd/logind.conf
+
+			sudo systemctl enable lidclose
+		fi
 	fi
 
 	# college files
