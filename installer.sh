@@ -140,17 +140,6 @@ then
 
 		./installall.sh
 
-		# systemd service for lidlock
-		prompt "Install systemd service that calls i3lock on lid closing? (you will need to change the username and location...)"
-
-		if [[ $REPLY =~ ^[Yy]$ ]]
-		then
-			cd $THISDIR
-			sudo cp configs/systemd/lidclose.service /etc/systemd/system/lidclose.service
-			sudo cp configs/systemd/logind.conf /etc/systemd/logind.conf
-
-			sudo systemctl enable lidclose
-		fi
 	fi
 
 	# college files
@@ -195,6 +184,16 @@ then
 	cd $THISDIR
 	echo -e "\n\n> Overwriting pulseaudio configs"
 	sudo cp "configs/pulse/"* /etc/pulse/
+fi
+
+# systemd service for lidlock
+prompt "Install systemd service for betterlockscreen and suspend on lid close?"
+
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	sudo cp configs/systemd/logind.conf /etc/systemd/logind.conf
+	sudo systemctl enable betterlockscreen@$USER.service
+	echo -e "betterlockscreen -u /path/to/image"
 fi
 
 prompt "Are you installing Arch on a VirtualBox virtual machine?"
