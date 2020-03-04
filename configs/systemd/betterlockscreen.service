@@ -6,7 +6,7 @@ Before=sleep.target
 User=%I
 Type=simple
 Environment=DISPLAY=:0
-ExecStart=/usr/bin/betterlockscreen -s blur
+ExecStart=/usr/bin/betterlockscreen -l -s blur
 TimeoutSec=infinity
 
 [Install]
