@@ -192,6 +192,7 @@ prompt "Install systemd service for betterlockscreen and suspend on lid close?"
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	sudo cp configs/systemd/logind.conf /etc/systemd/logind.conf
+	sudo cp configs/systemd/betterlockscreen.service "/etc/systemd/system/sleep.target.wants/betterlockscreen@$USER.service"
 	sudo systemctl enable betterlockscreen@$USER.service
 	echo -e "betterlockscreen -u /path/to/image"
 fi
