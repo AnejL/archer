@@ -85,9 +85,13 @@ then
 	cd $HOME
 	rm .bashrc .bash_profile .bash_history .bash_logout
 	git init
-	git remote add origin https://github.com/AnejL/dotfiles
+	git remote add origin https://github.com/AnejL/dotfiles.git
 	git pull origin master
 
+	cd $HOME/.local/sysprog/dbc
+	git init
+	git remote add origin https://github.com/AnejL/dbc.git
+	git pull origin master
 
 	prompt "Select this computer's unique profile name:"
 
