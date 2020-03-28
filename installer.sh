@@ -25,8 +25,6 @@ function installifmissing() {
 # defining global variables
 THISDIR=$PWD
 ESSENTIALS=$(cat essentials | tr "\n" " ")
-# SUCKLESSPROGRAMS=("")
-# SUCKLESSPROGRAMS=("dmenu surf")
 AURPROGRAMS=$(cat aur | tr '\n' ' ')
 
 # install packages provided in essential file
@@ -37,24 +35,6 @@ then
 	sudo pacman -Syu
 	sudo pacman -S $ESSENTIALS 
 fi
-
-# install specified suckless programs (NOW DEPRECATED AS I USE MY OWN FORKS)
-# prompt "Install suckless programs?"
-
-# if [[ $REPLY =~ ^[Yy]$ ]]
-# then
-	# install git and make if not installed already
-#	installifmissing git base-devel
-
-#	for sp in $SUCKLESSPROGRAMS; do
-		# cd /opt
-		# sudo git clone https://git.suckless.org/$sp
-		# sudo chmod +777 $sp
-		# cd $sp
-		# sudo chmod +777 *
-		# sudo make clean install
-	# done
-# fi
 
 cd $THISDIR
 
@@ -123,25 +103,6 @@ then
 	cd $HOME
 	mkdir Documents Pictures Downloads Devel Music Videos Backup # .fonts .themes .icons
 
-	prompt "Download my script folder in Documents/Scripts?"
-
-	if [[ $REPLY =~ ^[Yy]$ ]]
-	then
-		cd $HOME/Documents
-		git clone https://github.com/AnejL/Scripts
-
-		cd Scripts
-		git clone https://github.com/AnejL/dbc
-		cd dbc
-		sudo make clean install
-		
-		cd ..
-		git clone https://github.com/AnejL/archer
-
-		./installall.sh
-
-	fi
-
 	# college files
 	prompt "Download my college files?"
 
@@ -196,16 +157,6 @@ then
 	sudo systemctl enable betterlockscreen@$USER.service
 	echo -e "betterlockscreen -u /path/to/image"
 fi
-
-prompt "Are you installing Arch on a VirtualBox virtual machine?"
-
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-	sudo pacman -S virtualbox-guest-utils xf86-video-vmware
-	sudo systemctl enable vboxservice.service
-	sudo systemctl start vboxservice.service
-fi
-
 
 cd 
 
